@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { IungooLogo } from "@/components/icons";
+import { links } from "@/lib/data";
 
 export default function Home() {
   return (
@@ -12,33 +12,6 @@ export default function Home() {
     </div>
   );
 }
-
-const links = [
-  {
-    href: "/",
-    text: "Bounties",
-  },
-  {
-    href: "/",
-    text: "Hackathons",
-  },
-  {
-    href: "/",
-    text: "Airdrops",
-  },
-  {
-    href: "/",
-    text: "New Projects",
-  },
-  {
-    href: "/",
-    text: "NFT Mint",
-  },
-  {
-    href: "/",
-    text: "Grants",
-  },
-];
 
 function Navbar() {
   return (
