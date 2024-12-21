@@ -16,7 +16,7 @@ export default function Home() {
 function Navbar() {
   return (
     <nav className="bg-[#050505] ">
-      <div className="max-w-[90%] mx-auto py-4 flex justify-between items-center">
+      <div className="max-w-[85%] mx-auto py-4 flex justify-between items-center">
         <Link href={"/"}>
           <Image src={"/logo.svg"} alt="." width={176} height={50} />
         </Link>
@@ -40,7 +40,7 @@ function Navbar() {
 function Header() {
   return (
     <header className="h-screen lg:h-[calc(100vh-350px)] bg-black bg-[url(/hero-bg.svg)] bg-contain bg-top bg-no-repeat relative">
-      <div className="max-w-[90%] mx-auto pt-44">
+      <div className="max-w-[85%] mx-auto pt-44">
         <div className="max-w-[45%]">
           <h1 className="text-white text-7xl">
             Looks like you beat the crowd!
@@ -57,7 +57,7 @@ function Header() {
           width={350}
           height={420}
           alt="Astronaught"
-          className="absolute lg:bottom-0 lg:right-[20%]"
+          className="absolute lg:bottom-0 lg:right-[15%]"
         />
       </div>
     </header>
