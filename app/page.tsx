@@ -8,6 +8,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import AutoScroll from "embla-carousel-auto-scroll";
+import { UserIcon, JobHunt } from "@/lib/icons";
 
 const logos = [
   { src: "/carousel-logos/eth.svg", text: "Ethereun", alt: "Ethereum logo" },
@@ -114,26 +115,63 @@ function Services() {
   return (
     <section className="bg-black">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-white">What We Offer</h2>
-        <p className="text-white">
+        <h2 className="text-white text-3xl text-center">What We Offer</h2>
+        <p className="text-white text-center my-4 lg:max-w-[50%] mx-auto">
           Iungoo simplifies your Web3 journey by aggregating and categorizing
           all opportunities in one place
         </p>
-        <div>
+        <div className="flex items-center justify-between mt-32">
           <div>
-            <h3>Bounties & Hackathons</h3>
-            <ul>
-              <li>Solve real-world challenges</li>
-              <li>Contribute to projects</li>
-              <li>Join vibrant communities</li>
+            <UserIcon />
+            <h3 className="text-2xl text-white mt-2">Bounties & Hackathons</h3>
+            <p className="my-4 text-[#BDBDBD] ">
+              Earn rewards by contributing to blockchain projects.
+            </p>
+            <ul className="space-y-4">
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Solve real-world challenges
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Contribute to projects
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Join vibrant communities
+              </li>
             </ul>
           </div>
           <Image
             alt="Screen Image"
             src="/screen.svg"
-            width={530}
-            height={563}
+            width={430}
+            height={463}
           />
+        </div>
+        <div className="flex items-center justify-between mt-32">
+          <div>
+            <UserIcon />
+            <h3 className="text-2xl text-white mt-2">Bounties & Hackathons</h3>
+            <p className="my-4 text-[#BDBDBD] ">
+              Earn rewards by contributing to blockchain projects.
+            </p>
+            <ul className="space-y-4">
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Solve real-world challenges
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Contribute to projects
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Join vibrant communities
+              </li>
+            </ul>
+          </div>
+          <JobHunt />
         </div>
       </div>
     </section>
