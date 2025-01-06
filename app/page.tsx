@@ -8,7 +8,14 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import AutoScroll from "embla-carousel-auto-scroll";
-import { UserIcon, JobHunt } from "@/lib/icons";
+import {
+  UserIcon,
+  JobHunt,
+  Airdrops,
+  NFTMint,
+  PenIcon,
+  BoltIcon,
+} from "@/lib/icons";
 
 const logos = [
   { src: "/carousel-logos/eth.svg", text: "Ethereun", alt: "Ethereum logo" },
@@ -149,29 +156,163 @@ function Services() {
             height={463}
           />
         </div>
-        <div className="flex items-center justify-between mt-32">
+        <div className="flex items-center lg:flex-row-reverse justify-between mt-36">
           <div>
-            <UserIcon />
-            <h3 className="text-2xl text-white mt-2">Bounties & Hackathons</h3>
+            <PenIcon />
+            <h3 className="text-2xl text-white mt-2">
+              New Projects & Job Listings
+            </h3>
             <p className="my-4 text-[#BDBDBD] ">
-              Earn rewards by contributing to blockchain projects.
+              Find credible job listings and avoid scams.
             </p>
             <ul className="space-y-4">
               <li className="flex items-center gap-2 text-[#BDBDBD]">
                 <Image src="/checkmark.svg" width={20} height={20} alt="" />
-                Solve real-world challenges
+                Explore new projects
               </li>
               <li className="flex items-center gap-2 text-[#BDBDBD]">
                 <Image src="/checkmark.svg" width={20} height={20} alt="" />
-                Contribute to projects
+                Discover latest jobs
               </li>
               <li className="flex items-center gap-2 text-[#BDBDBD]">
                 <Image src="/checkmark.svg" width={20} height={20} alt="" />
-                Join vibrant communities
+                Create your coding ambiance effortlessly
               </li>
             </ul>
           </div>
           <JobHunt />
+        </div>
+        <div className="flex items-center justify-between mt-36">
+          <div>
+            <PenIcon />
+            <h3 className="text-2xl text-white mt-2">Airdrops</h3>
+            <p className="my-4 text-[#BDBDBD] ">
+              Stay informed about the latest airdrop dates.
+            </p>
+            <ul className="space-y-4">
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Discover Airdrops
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Explore Trending Airdrops
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Find Upcoming Airdrops
+              </li>
+            </ul>
+          </div>
+          <Airdrops />
+        </div>
+        <div className="flex items-center lg:flex-row-reverse justify-between mt-36">
+          <div>
+            <PenIcon />
+            <h3 className="text-2xl text-white mt-2">NFT Mint Calendar</h3>
+            <p className="my-4 text-[#BDBDBD] ">
+              Stay informed about the latest NFT mint dates.
+            </p>
+            <ul className="space-y-4">
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Upcoming NFT Mints.
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Trending NFT projects.
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Whitelist Collabs & Giveaways.
+              </li>
+            </ul>
+          </div>
+          <NFTMint />
+        </div>
+        <div className="flex items-center justify-between mt-36">
+          <div>
+            <BoltIcon />
+            <h3 className="text-2xl text-white mt-2">
+              Blockchains & DAOs Directory
+            </h3>
+            <p className="my-4 text-[#BDBDBD] ">
+              Your one-stop shop for blockchain and DAO information.
+            </p>
+            <ul className="space-y-4">
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Blockchain directory
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                DAO explorer
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Blockchain resources
+              </li>
+            </ul>
+          </div>
+          <Image alt="Screen Image" src="/cubes.svg" width={530} height={563} />
+        </div>
+        <div className="flex items-center lg:flex-row-reverse justify-between mt-56">
+          <div>
+            <PenIcon />
+            <h3 className="text-2xl text-white mt-2">IRL Events</h3>
+            <p className="my-4 text-[#BDBDBD] ">
+              Stay up-to-date with the latest events near you.
+            </p>
+            <ul className="space-y-4">
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Upcoming events
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Free pass & exclusive events
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Connect with like-minded individuals
+              </li>
+            </ul>
+          </div>
+          <Image
+            alt="Screen Image"
+            src="/events.svg"
+            width={530}
+            height={563}
+          />
+        </div>
+        <div className="flex items-center justify-between mt-56">
+          <div>
+            <BoltIcon />
+            <h3 className="text-2xl text-white mt-2">Ambassador Programs</h3>
+            <p className="my-4 text-[#BDBDBD] ">
+              Find and join ambassador programs for Web3 brands.
+            </p>
+            <ul className="space-y-4">
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Build & grow communities.
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Create awareness on your socials.
+              </li>
+              <li className="flex items-center gap-2 text-[#BDBDBD]">
+                <Image src="/checkmark.svg" width={20} height={20} alt="" />
+                Get rewarded by gaining experience.
+              </li>
+            </ul>
+          </div>
+          <Image
+            alt="Screen Image"
+            src="/calendar.svg"
+            width={530}
+            height={563}
+          />
         </div>
       </div>
     </section>
