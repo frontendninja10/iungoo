@@ -94,12 +94,12 @@ function Navbar() {
 function Header() {
   return (
     <header className="h-screen lg:h-[calc(100vh-350px)] bg-black bg-[url(/hero-bg.svg)] bg-contain bg-top bg-no-repeat relative">
-      <div className="max-w-[85%] mx-auto pt-44">
-        <div className="max-w-[45%]">
-          <h1 className="text-white text-7xl">
+      <div className="max-w-[85%] mx-auto pt-20 lg:pt-44">
+        <div className="max-w-full lg:max-w-[45%]">
+          <h1 className="text-white text-5xl lg:text-7xl">
             Looks like you beat the crowd!
           </h1>
-          <p className="text-white max-w-[45%] my-5 text-lg mt-10">
+          <p className="text-white max-w-full lg:max-w-[45%] my-5 text-lg mt-5 lg:mt-10">
             Discover and explore opportunities across 100 Blockchains.
           </p>
           <button className="bg-white text-black px-5 py-3 rounded-3xl">
@@ -108,10 +108,10 @@ function Header() {
         </div>
         <Image
           src={"/astronaught.svg"}
-          width={350}
-          height={420}
+          width={250}
+          height={300}
           alt="Astronaught"
-          className="absolute lg:bottom-0 lg:right-[15%]"
+          className="absolute bottom-0 right-0 lg:right-[15%] lg:w-[350px] lg:h-[420px] lg:bottom-0"
         />
       </div>
     </header>
