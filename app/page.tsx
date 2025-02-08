@@ -33,14 +33,14 @@ const logos = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] bg-[#050505]">
       <Navbar />
       <Header />
       <Carousel
         plugins={[AutoScroll({ active: true })]}
         className="py-28 bg-black"
       >
-        <CarouselContent className="md:-ml-4">
+        <CarouselContent className="lg:-ml-4">
           {Array.from({ length: logos.length }, (_, i) => (
             <CarouselItem
               key={i}
@@ -69,12 +69,12 @@ export default function Home() {
 
 function Navbar() {
   return (
-    <nav className="bg-[#050505] ">
+    <nav className="bg-[#050505] border-none">
       <div className="max-w-[85%] mx-auto py-4 flex justify-between items-center">
         <Link href={"/"}>
           <Image src={"/logo.svg"} alt="." width={176} height={50} />
         </Link>
-        <ul className="text-white flex gap-10">
+        <ul className="text-white gap-10 hidden lg:flex">
           {links.map((link, index) => (
             <li key={index}>
               <Link href={link.href} className="uppercase">
@@ -83,7 +83,7 @@ function Navbar() {
             </li>
           ))}
         </ul>
-        <button className="bg-white text-black px-5 py-3 rounded-3xl">
+        <button className="bg-white text-black px-5 py-3 rounded-3xl hidden lg:block">
           Join our Community
         </button>
       </div>
@@ -93,13 +93,13 @@ function Navbar() {
 
 function Header() {
   return (
-    <header className="h-screen lg:h-[calc(100vh-350px)] bg-black bg-[url(/hero-bg.svg)] bg-contain bg-top bg-no-repeat relative">
-      <div className="max-w-[85%] mx-auto pt-44">
-        <div className="max-w-[45%]">
-          <h1 className="text-white text-7xl">
+    <header className="h-[700px] lg:h-[calc(100vh-350px)] bg-black bg-[url(/hero-bg.svg)] bg-contain bg-top bg-no-repeat relative border-none">
+      <div className="max-w-[85%] mx-auto pt-20 lg:pt-44">
+        <div className="max-w-full lg:max-w-[45%]">
+          <h1 className="text-white text-5xl lg:text-7xl">
             Looks like you beat the crowd!
           </h1>
-          <p className="text-white max-w-[45%] my-5 text-lg mt-10">
+          <p className="text-white max-w-full lg:max-w-[45%] my-5 text-lg mt-5 lg:mt-10">
             Discover and explore opportunities across 100 Blockchains.
           </p>
           <button className="bg-white text-black px-5 py-3 rounded-3xl">
@@ -108,10 +108,10 @@ function Header() {
         </div>
         <Image
           src={"/astronaught.svg"}
-          width={350}
-          height={420}
+          width={250}
+          height={300}
           alt="Astronaught"
-          className="absolute lg:bottom-0 lg:right-[15%]"
+          className="absolute bottom-0 mx-auto lg:right-[15%] lg:mx-0 lg:w-[350px] lg:h-[420px] lg:bottom-0"
         />
       </div>
     </header>
@@ -121,13 +121,13 @@ function Header() {
 function Services() {
   return (
     <section className="bg-black">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-white text-3xl text-center">What We Offer</h2>
         <p className="text-white text-center my-4 lg:max-w-[50%] mx-auto">
           Iungoo simplifies your Web3 journey by aggregating and categorizing
           all opportunities in one place
         </p>
-        <div className="flex items-center justify-between mt-32">
+        <div className="flex-col lg:flex items-center justify-between mt-32">
           <div>
             <UserIcon />
             <h3 className="text-2xl text-white mt-2">Bounties & Hackathons</h3>
@@ -152,11 +152,12 @@ function Services() {
           <Image
             alt="Screen Image"
             src="/screen.svg"
-            width={430}
-            height={463}
+            width={300} // Default width for mobile
+            height={320} // Default height for mobile
+            className="w-[260px] h-[280px] lg:w-[430px] lg:h-[463px] mx-auto"
           />
         </div>
-        <div className="flex items-center lg:flex-row-reverse justify-between mt-36">
+        <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-36">
           <div>
             <PenIcon />
             <h3 className="text-2xl text-white mt-2">
@@ -180,9 +181,9 @@ function Services() {
               </li>
             </ul>
           </div>
-          <JobHunt />
+          <JobHunt className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto" />
         </div>
-        <div className="flex items-center justify-between mt-36">
+        <div className="flex-col lg:flex items-center justify-between mt-36">
           <div>
             <PenIcon />
             <h3 className="text-2xl text-white mt-2">Airdrops</h3>
@@ -204,9 +205,9 @@ function Services() {
               </li>
             </ul>
           </div>
-          <Airdrops />
+          <Airdrops className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto" />
         </div>
-        <div className="flex items-center lg:flex-row-reverse justify-between mt-36">
+        <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-36">
           <div>
             <PenIcon />
             <h3 className="text-2xl text-white mt-2">NFT Mint Calendar</h3>
@@ -228,9 +229,9 @@ function Services() {
               </li>
             </ul>
           </div>
-          <NFTMint />
+          <NFTMint className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto" />
         </div>
-        <div className="flex items-center justify-between mt-36">
+        <div className="flex-col lg:flex items-center justify-between mt-36">
           <div>
             <BoltIcon />
             <h3 className="text-2xl text-white mt-2">
@@ -254,9 +255,15 @@ function Services() {
               </li>
             </ul>
           </div>
-          <Image alt="Screen Image" src="/cubes.svg" width={530} height={563} />
+          <Image
+            alt="Screen Image"
+            src="/cubes.svg"
+            width={530}
+            height={563}
+            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto"
+          />
         </div>
-        <div className="flex items-center lg:flex-row-reverse justify-between mt-56">
+        <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-56">
           <div>
             <PenIcon />
             <h3 className="text-2xl text-white mt-2">IRL Events</h3>
@@ -283,9 +290,10 @@ function Services() {
             src="/events.svg"
             width={530}
             height={563}
+            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto"
           />
         </div>
-        <div className="flex items-center justify-between mt-56">
+        <div className="flex-col lg:flex items-center justify-between mt-56">
           <div>
             <BoltIcon />
             <h3 className="text-2xl text-white mt-2">Ambassador Programs</h3>
@@ -312,6 +320,7 @@ function Services() {
             src="/calendar.svg"
             width={530}
             height={563}
+            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto"
           />
         </div>
       </div>
