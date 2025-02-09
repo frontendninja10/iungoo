@@ -7,6 +7,16 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import AutoScroll from "embla-carousel-auto-scroll";
 import {
   UserIcon,
@@ -15,7 +25,11 @@ import {
   NFTMint,
   PenIcon,
   BoltIcon,
+  TwitterIcon,
+  DiscordIcon,
+  CheckMark,
 } from "@/lib/icons";
+import { use, useState, FormEvent } from "react";
 
 const logos = [
   { src: "/carousel-logos/eth.svg", text: "Ethereun", alt: "Ethereum logo" },
@@ -92,6 +106,42 @@ function Navbar() {
 }
 
 function Header() {
+  const [open, setOpen] = useState(false);
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({ firstName: "", email: "" });
+  const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const formDetails = new FormData();
+
+    formDetails.append("firstName", "JK");
+    formDetails.append("email", "kl");
+
+    fetch(
+      "https://script.google.com/macros/s/AKfycbxYgre0xXaCtANmivQt-sOOSTiPjuNlMVHbVFS8rQwJYb2y0cSvuYm9c3ruduzHyXVbDw/exec",
+      {
+        method: "POST",
+        body: formDetails,
+      }
+    )
+      .then((response) => response.text())
+      .then((data) => {
+        console.log("Success message:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    // setStep(2);
+    // setTimeout(() => setStep(3), 2000);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setStep(1);
+  };
+
   return (
     <header className="h-[700px] lg:h-[calc(100vh-350px)] bg-black bg-[url(/hero-bg.svg)] bg-contain bg-top bg-no-repeat relative border-none">
       <div className="max-w-[85%] mx-auto pt-20 lg:pt-44">
@@ -102,7 +152,10 @@ function Header() {
           <p className="text-white max-w-full lg:max-w-[45%] my-5 text-lg mt-5 lg:mt-10">
             Discover and explore opportunities across 100 Blockchains.
           </p>
-          <button className="bg-white text-black px-5 py-3 rounded-3xl">
+          <button
+            onClick={() => setOpen(true)}
+            className="bg-white text-black px-5 py-3 rounded-3xl"
+          >
             Join the Waitlist
           </button>
         </div>
@@ -114,6 +167,79 @@ function Header() {
           className="absolute bottom-0 mx-auto lg:right-[15%] lg:mx-0 lg:w-[350px] lg:h-[420px] lg:bottom-0"
         />
       </div>
+      <Dialog open={open} onOpenChange={handleClose}>
+        <DialogContent className="max-w-[90%] lg:max-w-md lg:py-20 bg-zinc-950 text-white border-zinc-800">
+          {step === 1 && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-xl text-center">
+                  You have made a great decision
+                </DialogTitle>
+              </DialogHeader>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <Input
+                  placeholder="Your first name"
+                  className="bg-transparent border-zinc-800"
+                  value={formData.firstName}
+                  name="firstName"
+                  onChange={(e) =>
+                    setFormData({ ...formData, firstName: e.target.value })
+                  }
+                  required
+                />
+                <Input
+                  type="email"
+                  placeholder="Your Email Address"
+                  className="bg-transparent border-zinc-800"
+                  value={formData.email}
+                  name="email"
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  required
+                />
+                <Button
+                  type="submit"
+                  className="w-full bg-white text-black hover:bg-gray-200"
+                >
+                  Submit
+                </Button>
+              </form>
+            </>
+          )}
+
+          {step === 2 && (
+            <div className="text-center py-6 space-y-4">
+              <CheckMark className="w-24 h-24 mx-auto" />
+              <DialogTitle className="text-2xl">Success!</DialogTitle>
+              <p className="text-zinc-400">
+                You have been added to the waitlist.
+              </p>
+              <p className="text-zinc-400">
+                Check your email to see more information
+              </p>
+            </div>
+          )}
+
+          {step === 3 && (
+            <div className="text-center py-6 space-y-6">
+              <DialogTitle className="text-xl">
+                You have joined the waitlist.
+              </DialogTitle>
+              <div className="flex flex-col gap-3 items-center">
+                <div className="flex items-center gap-2">
+                  <p className="text-zinc-400 text-xl">Follow us on:</p>
+                  <TwitterIcon className="w-[40px] h-[40px]" />
+                </div>
+                <div className="flex items-center gap-2">
+                  <p className="text-zinc-400 text-xl">Join us on:</p>
+                  <DiscordIcon className="w-[41px] h-[40px]" />
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </header>
   );
 }
@@ -127,7 +253,7 @@ function Services() {
           Iungoo simplifies your Web3 journey by aggregating and categorizing
           all opportunities in one place
         </p>
-        <div className="flex-col lg:flex items-center justify-between mt-32">
+        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-32">
           <div>
             <UserIcon />
             <h3 className="text-2xl text-white mt-2">Bounties & Hackathons</h3>
@@ -181,9 +307,9 @@ function Services() {
               </li>
             </ul>
           </div>
-          <JobHunt className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto" />
+          <JobHunt className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0" />
         </div>
-        <div className="flex-col lg:flex items-center justify-between mt-36">
+        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-36">
           <div>
             <PenIcon />
             <h3 className="text-2xl text-white mt-2">Airdrops</h3>
@@ -205,7 +331,7 @@ function Services() {
               </li>
             </ul>
           </div>
-          <Airdrops className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto" />
+          <Airdrops className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0" />
         </div>
         <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-36">
           <div>
@@ -229,9 +355,9 @@ function Services() {
               </li>
             </ul>
           </div>
-          <NFTMint className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto" />
+          <NFTMint className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0" />
         </div>
-        <div className="flex-col lg:flex items-center justify-between mt-36">
+        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-36">
           <div>
             <BoltIcon />
             <h3 className="text-2xl text-white mt-2">
@@ -260,7 +386,7 @@ function Services() {
             src="/cubes.svg"
             width={530}
             height={563}
-            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto"
+            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0"
           />
         </div>
         <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-56">
@@ -290,10 +416,10 @@ function Services() {
             src="/events.svg"
             width={530}
             height={563}
-            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto"
+            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0"
           />
         </div>
-        <div className="flex-col lg:flex items-center justify-between mt-56">
+        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-56">
           <div>
             <BoltIcon />
             <h3 className="text-2xl text-white mt-2">Ambassador Programs</h3>
@@ -320,7 +446,7 @@ function Services() {
             src="/calendar.svg"
             width={530}
             height={563}
-            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto"
+            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0"
           />
         </div>
       </div>
