@@ -29,7 +29,7 @@ import {
   DiscordIcon,
   CheckMark,
 } from "@/lib/icons";
-import { use, useState } from "react";
+import { use, useState, FormEvent } from "react";
 
 const logos = [
   { src: "/carousel-logos/eth.svg", text: "Ethereun", alt: "Ethereum logo" },
@@ -109,12 +109,32 @@ function Header() {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({ firstName: "", email: "" });
+  const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // Send data to backend
-    setStep(2);
-    setTimeout(() => setStep(3), 2000);
+    const formDetails = new FormData();
+
+    formDetails.append("firstName", "JK");
+    formDetails.append("email", "kl");
+
+    fetch(
+      "https://script.google.com/macros/s/AKfycbxYgre0xXaCtANmivQt-sOOSTiPjuNlMVHbVFS8rQwJYb2y0cSvuYm9c3ruduzHyXVbDw/exec",
+      {
+        method: "POST",
+        body: formDetails,
+      }
+    )
+      .then((response) => response.text())
+      .then((data) => {
+        console.log("Success message:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    // setStep(2);
+    // setTimeout(() => setStep(3), 2000);
   };
 
   const handleClose = () => {
@@ -148,7 +168,7 @@ function Header() {
         />
       </div>
       <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent className="sm:max-w-md bg-zinc-950 text-white border-zinc-800">
+        <DialogContent className="max-w-[90%] lg:max-w-md lg:py-20 bg-zinc-950 text-white border-zinc-800">
           {step === 1 && (
             <>
               <DialogHeader>
@@ -161,6 +181,7 @@ function Header() {
                   placeholder="Your first name"
                   className="bg-transparent border-zinc-800"
                   value={formData.firstName}
+                  name="firstName"
                   onChange={(e) =>
                     setFormData({ ...formData, firstName: e.target.value })
                   }
@@ -171,6 +192,7 @@ function Header() {
                   placeholder="Your Email Address"
                   className="bg-transparent border-zinc-800"
                   value={formData.email}
+                  name="email"
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
@@ -231,7 +253,7 @@ function Services() {
           Iungoo simplifies your Web3 journey by aggregating and categorizing
           all opportunities in one place
         </p>
-        <div className="flex-col lg:flex items-center justify-between mt-32">
+        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-32">
           <div>
             <UserIcon />
             <h3 className="text-2xl text-white mt-2">Bounties & Hackathons</h3>
@@ -285,9 +307,9 @@ function Services() {
               </li>
             </ul>
           </div>
-          <JobHunt className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto" />
+          <JobHunt className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0" />
         </div>
-        <div className="flex-col lg:flex items-center justify-between mt-36">
+        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-36">
           <div>
             <PenIcon />
             <h3 className="text-2xl text-white mt-2">Airdrops</h3>
@@ -309,7 +331,7 @@ function Services() {
               </li>
             </ul>
           </div>
-          <Airdrops className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto" />
+          <Airdrops className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0" />
         </div>
         <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-36">
           <div>
@@ -333,9 +355,9 @@ function Services() {
               </li>
             </ul>
           </div>
-          <NFTMint className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto" />
+          <NFTMint className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0" />
         </div>
-        <div className="flex-col lg:flex items-center justify-between mt-36">
+        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-36">
           <div>
             <BoltIcon />
             <h3 className="text-2xl text-white mt-2">
@@ -364,7 +386,7 @@ function Services() {
             src="/cubes.svg"
             width={530}
             height={563}
-            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto"
+            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0"
           />
         </div>
         <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-56">
@@ -394,10 +416,10 @@ function Services() {
             src="/events.svg"
             width={530}
             height={563}
-            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto"
+            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0"
           />
         </div>
-        <div className="flex-col lg:flex items-center justify-between mt-56">
+        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-56">
           <div>
             <BoltIcon />
             <h3 className="text-2xl text-white mt-2">Ambassador Programs</h3>
@@ -424,7 +446,7 @@ function Services() {
             src="/calendar.svg"
             width={530}
             height={563}
-            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto"
+            className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0"
           />
         </div>
       </div>
