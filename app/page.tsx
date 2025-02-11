@@ -30,6 +30,13 @@ import {
   CheckMark,
 } from "@/lib/icons";
 import { use, useState, FormEvent } from "react";
+import { createClient } from '@supabase/supabase-js'
+
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
 const logos = [
   { src: "/carousel-logos/eth.svg", text: "Ethereun", alt: "Ethereum logo" },
@@ -109,37 +116,40 @@ function Header() {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({ firstName: "", email: "" });
-  const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const formDetails = new FormData();
+    setIsSubmitting(true);
 
-    formDetails.append("firstName", "JK");
-    formDetails.append("email", "kl");
+    try {
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([
+          {
+            first_name: formData.firstName,
+            email: formData.email,
+          }
+        ]);
 
-    fetch(
-      "https://script.google.com/macros/s/AKfycbxYgre0xXaCtANmivQt-sOOSTiPjuNlMVHbVFS8rQwJYb2y0cSvuYm9c3ruduzHyXVbDw/exec",
-      {
-        method: "POST",
-        body: formDetails,
+      if (error) {
+        throw error;
       }
-    )
-      .then((response) => response.text())
-      .then((data) => {
-        console.log("Success message:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
 
-    // setStep(2);
-    // setTimeout(() => setStep(3), 2000);
+      setStep(2);
+      setTimeout(() => setStep(3), 2000);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      // You might want to show an error message to the user here
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleClose = () => {
     setOpen(false);
     setStep(1);
+    setFormData({ firstName: "", email: "" });
   };
 
   return (
@@ -172,37 +182,43 @@ function Header() {
           {step === 1 && (
             <>
               <DialogHeader>
-                <DialogTitle className="text-xl text-center">
-                  You have made a great decision
+                <DialogTitle className="text-2xl text-center font-semibold">
+                  Join Our Waitlist
                 </DialogTitle>
+                <DialogDescription className="text-center text-zinc-400">
+                  Be the first to know when we launch
+                </DialogDescription>
               </DialogHeader>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <Input
                   placeholder="Your first name"
-                  className="bg-transparent border-zinc-800"
+                  className="bg-transparent border-zinc-800 focus:border-white transition-colors"
                   value={formData.firstName}
                   name="firstName"
                   onChange={(e) =>
                     setFormData({ ...formData, firstName: e.target.value })
                   }
                   required
+                  disabled={isSubmitting}
                 />
                 <Input
                   type="email"
                   placeholder="Your Email Address"
-                  className="bg-transparent border-zinc-800"
+                  className="bg-transparent border-zinc-800 focus:border-white transition-colors"
                   value={formData.email}
                   name="email"
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
                   required
+                  disabled={isSubmitting}
                 />
                 <Button
                   type="submit"
-                  className="w-full bg-white text-black hover:bg-gray-200"
+                  className="w-full bg-white text-black hover:bg-gray-200 transition-colors"
+                  disabled={isSubmitting}
                 >
-                  Submit
+                  {isSubmitting ? "Submitting..." : "Join Waitlist"}
                 </Button>
               </form>
             </>
