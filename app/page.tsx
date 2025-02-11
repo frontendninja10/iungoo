@@ -14,7 +14,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import AutoScroll from "embla-carousel-auto-scroll";
@@ -29,7 +28,7 @@ import {
   DiscordIcon,
   CheckMark,
 } from "@/lib/icons";
-import { use, useState, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import { createClient } from '@supabase/supabase-js'
 
 // Initialize Supabase client
@@ -140,7 +139,6 @@ function Header() {
       setTimeout(() => setStep(3), 2000);
     } catch (error) {
       console.error("Error submitting form:", error);
-      // You might want to show an error message to the user here
     } finally {
       setIsSubmitting(false);
     }
@@ -177,6 +175,7 @@ function Header() {
           className="absolute bottom-0 mx-auto lg:right-[15%] lg:mx-0 lg:w-[350px] lg:h-[420px] lg:bottom-0"
         />
       </div>
+
       <Dialog open={open} onOpenChange={handleClose}>
         <DialogContent className="max-w-[90%] lg:max-w-md lg:py-20 bg-zinc-950 text-white border-zinc-800">
           {step === 1 && (
@@ -194,7 +193,6 @@ function Header() {
                   placeholder="Your first name"
                   className="bg-transparent border-zinc-800 focus:border-white transition-colors"
                   value={formData.firstName}
-                  name="firstName"
                   onChange={(e) =>
                     setFormData({ ...formData, firstName: e.target.value })
                   }
@@ -206,7 +204,6 @@ function Header() {
                   placeholder="Your Email Address"
                   className="bg-transparent border-zinc-800 focus:border-white transition-colors"
                   value={formData.email}
-                  name="email"
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }

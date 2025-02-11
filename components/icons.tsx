@@ -7,6 +7,7 @@ export function IungooLogo(props: SVGAttributes<SVGElement>) {
       viewBox="0 0 177 50"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <path
         d="M12.5332 38.3267C10.8803 37.9928 9.22739 37.6589 7.5745 37.325C9.22711 29.1742 9.06883 20.7776 7.1546 12.7211C8.92427 13.0541 10.7144 13.3143 12.5049 13.4907C14.1842 21.658 14.2085 30.1106 12.5332 38.3267Z"
