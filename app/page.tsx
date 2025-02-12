@@ -485,14 +485,17 @@ function CallToAction({ setOpen }: { setOpen: (value: boolean) => void }) {
       </h2>
       <div className="flex gap-4 self-center">
         <Button
+          asChild
           variant="outline"
           className="rounded-3xl bg-transparent text-white"
         >
-          Be part of our Community
+          <Link href="https://discord.gg/9wGbpMxC">
+            Be part of our Community
+          </Link>
         </Button>
         <Button
           onClick={() => setOpen(true)}
-          className="rounded-3xl bg-white text-black"
+          className="rounded-3xl bg-white text-black hover:text-black hover:bg-white"
         >
           Join the waitlist
         </Button>
