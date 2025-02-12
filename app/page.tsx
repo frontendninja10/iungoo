@@ -39,7 +39,7 @@ const supabase = createClient(
 );
 
 const logos = [
-  { src: "/carousel-logos/eth.svg", text: "Ethereun", alt: "Ethereum logo" },
+  { src: "/carousel-logos/eth.svg", text: "Ethereum", alt: "Ethereum logo" },
   { src: "/carousel-logos/btc.svg", text: "Bitcoin", alt: "Bitcoin logo" },
   { src: "/carousel-logos/sol.svg", text: "Solana", alt: "Solana logo" },
   { src: "/carousel-logos/sui.svg", text: "Sui", alt: "Sui logo" },
