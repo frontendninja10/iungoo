@@ -29,16 +29,17 @@ import {
   CheckMark,
 } from "@/lib/icons";
 import { useState, FormEvent } from "react";
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from "@supabase/supabase-js";
+import { IungooLogo } from "@/components/icons";
 
 // Initialize Supabase client
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+);
 
 const logos = [
-  { src: "/carousel-logos/eth.svg", text: "Ethereun", alt: "Ethereum logo" },
+  { src: "/carousel-logos/eth.svg", text: "Ethereum", alt: "Ethereum logo" },
   { src: "/carousel-logos/btc.svg", text: "Bitcoin", alt: "Bitcoin logo" },
   { src: "/carousel-logos/sol.svg", text: "Solana", alt: "Solana logo" },
   { src: "/carousel-logos/sui.svg", text: "Sui", alt: "Sui logo" },
@@ -52,10 +53,12 @@ const logos = [
 ];
 
 export default function Home() {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="min-h-screen font-[family-name:var(--font-geist-sans)] bg-[#050505]">
       <Navbar />
-      <Header />
+      <Header open={open} setOpen={setOpen} />
       <Carousel
         plugins={[AutoScroll({ active: true })]}
         className="py-28 bg-black"
@@ -81,8 +84,8 @@ export default function Home() {
         </CarouselContent>
       </Carousel>
       <Services />
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start"></main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center"></footer>
+      <CallToAction setOpen={setOpen} />
+      <Footer />
     </div>
   );
 }
@@ -111,8 +114,13 @@ function Navbar() {
   );
 }
 
-function Header() {
-  const [open, setOpen] = useState(false);
+function Header({
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen: (value: boolean) => void;
+}) {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({ firstName: "", email: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -122,14 +130,12 @@ function Header() {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
-        .from('waitlist')
-        .insert([
-          {
-            first_name: formData.firstName,
-            email: formData.email,
-          }
-        ]);
+      const { error } = await supabase.from("waitlist").insert([
+        {
+          first_name: formData.firstName,
+          email: formData.email,
+        },
+      ]);
 
       if (error) {
         throw error;
@@ -151,13 +157,13 @@ function Header() {
   };
 
   return (
-    <header className="h-[700px] lg:h-[calc(100vh-350px)] bg-black bg-[url(/hero-bg.svg)] bg-contain bg-top bg-no-repeat relative border-none">
+    <header className="h-[700px] lg:h-[calc(100vh-300px)] bg-black bg-[url(/hero-bg.svg)] bg-contain bg-top bg-no-repeat relative border-none">
       <div className="max-w-[85%] mx-auto pt-20 lg:pt-44">
         <div className="max-w-full lg:max-w-[45%]">
           <h1 className="text-white text-5xl lg:text-7xl">
             Looks like you beat the crowd!
           </h1>
-          <p className="text-white max-w-full lg:max-w-[45%] my-5 text-lg mt-5 lg:mt-10">
+          <p className="text-white max-w-full lg:max-w-[85%] my-5 text-lg mt-5 lg:mt-10">
             Discover and explore opportunities across 100 Blockchains.
           </p>
           <button
@@ -241,12 +247,16 @@ function Header() {
               </DialogTitle>
               <div className="flex flex-col gap-3 items-center">
                 <div className="flex items-center gap-2">
-                  <p className="text-zinc-400 text-xl">Follow us on:</p>
-                  <TwitterIcon className="w-[40px] h-[40px]" />
+                  <p className="text-zinc-400 text-xl">Follow us on</p>
+                  <Link href="https://x.com/iungooxyz">
+                    <TwitterIcon className="w-[40px] h-[40px]" />
+                  </Link>
                 </div>
                 <div className="flex items-center gap-2">
-                  <p className="text-zinc-400 text-xl">Join us on:</p>
-                  <DiscordIcon className="w-[41px] h-[40px]" />
+                  <p className="text-zinc-400 text-xl">Join us on</p>
+                  <Link href="https://discord.gg/9wGbpMxC">
+                    <DiscordIcon className="w-[41px] h-[40px]" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -266,7 +276,7 @@ function Services() {
           Iungoo simplifies your Web3 journey by aggregating and categorizing
           all opportunities in one place
         </p>
-        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-32">
+        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-20 lg:mt-32">
           <div>
             <UserIcon />
             <h3 className="text-2xl text-white mt-2">Bounties & Hackathons</h3>
@@ -293,10 +303,10 @@ function Services() {
             src="/screen.svg"
             width={300} // Default width for mobile
             height={320} // Default height for mobile
-            className="w-[260px] h-[280px] lg:w-[430px] lg:h-[463px] mx-auto"
+            className="w-[260px] h-[280px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0"
           />
         </div>
-        <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-36">
+        <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-20 lg:mt-32">
           <div>
             <PenIcon />
             <h3 className="text-2xl text-white mt-2">
@@ -322,7 +332,7 @@ function Services() {
           </div>
           <JobHunt className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0" />
         </div>
-        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-36">
+        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-20 lg:mt-32">
           <div>
             <PenIcon />
             <h3 className="text-2xl text-white mt-2">Airdrops</h3>
@@ -346,7 +356,7 @@ function Services() {
           </div>
           <Airdrops className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0" />
         </div>
-        <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-36">
+        <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-20 lg:mt-32">
           <div>
             <PenIcon />
             <h3 className="text-2xl text-white mt-2">NFT Mint Calendar</h3>
@@ -370,7 +380,7 @@ function Services() {
           </div>
           <NFTMint className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0" />
         </div>
-        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-36">
+        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-20 lg:mt-32">
           <div>
             <BoltIcon />
             <h3 className="text-2xl text-white mt-2">
@@ -402,7 +412,7 @@ function Services() {
             className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0"
           />
         </div>
-        <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-56">
+        <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-20 lg:mt-32">
           <div>
             <PenIcon />
             <h3 className="text-2xl text-white mt-2">IRL Events</h3>
@@ -432,7 +442,7 @@ function Services() {
             className="w-[300px] h-[320px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0"
           />
         </div>
-        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-56">
+        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-20 lg:mt-32">
           <div>
             <BoltIcon />
             <h3 className="text-2xl text-white mt-2">Ambassador Programs</h3>
@@ -464,5 +474,40 @@ function Services() {
         </div>
       </div>
     </section>
+  );
+}
+
+function CallToAction({ setOpen }: { setOpen: (value: boolean) => void }) {
+  return (
+    <section className="flex justify-center flex-col text-center gap-10 lg:py-36">
+      <h2 className="text-white text-4xl">
+        Ready to explore endless Web3 possibilities?
+      </h2>
+      <div className="flex gap-4 self-center">
+        <Button
+          variant="outline"
+          className="rounded-3xl bg-transparent text-white"
+        >
+          Be part of our Community
+        </Button>
+        <Button
+          onClick={() => setOpen(true)}
+          className="rounded-3xl bg-white text-black"
+        >
+          Join the waitlist
+        </Button>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t-[1px] border-[#E0E0E0] flex justify-center lg:py-14">
+      <div className="flex gap-4 items-center">
+        <IungooLogo className="text-white h-14 w-20" />
+        <p className="text-white">Built with ❤️ by Iungoo</p>
+      </div>
+    </footer>
   );
 }
