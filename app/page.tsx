@@ -270,13 +270,13 @@ function Header({
 function Services() {
   return (
     <section className="bg-black">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-5xl mx-auto px-4">
         <h2 className="text-white text-3xl text-center">What We Offer</h2>
         <p className="text-white text-center my-4 lg:max-w-[50%] mx-auto">
           Iungoo simplifies your Web3 journey by aggregating and categorizing
           all opportunities in one place
         </p>
-        <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-20 lg:mt-32">
+        <div className="flex-col space-y-10 lg:flex lg:flex-row items-center justify-between mt-20 lg:mt-32">
           <div>
             <UserIcon />
             <h3 className="text-2xl text-white mt-2">Bounties & Hackathons</h3>
@@ -303,7 +303,7 @@ function Services() {
             src="/screen.svg"
             width={300} // Default width for mobile
             height={320} // Default height for mobile
-            className="w-[260px] h-[280px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0"
+            className="w-[260px] h-[280px] lg:w-[390px] lg:h-[423px] mx-auto lg:mx-0"
           />
         </div>
         <div className="flex-col lg:flex items-center lg:flex-row-reverse justify-between mt-20 lg:mt-32">
@@ -330,7 +330,7 @@ function Services() {
               </li>
             </ul>
           </div>
-          <JobHunt className="w-[280px] h-[300px] lg:w-[430px] lg:h-[463px] mx-auto lg:mx-0" />
+          <JobHunt className="w-[280px] h-[300px] lg:w-[390px] lg:h-[423px] mx-auto lg:mx-0" />
         </div>
         <div className="flex-col lg:flex lg:flex-row items-center justify-between mt-20 lg:mt-32">
           <div>
@@ -479,11 +479,11 @@ function Services() {
 
 function CallToAction({ setOpen }: { setOpen: (value: boolean) => void }) {
   return (
-    <section className="flex justify-center flex-col text-center gap-10 lg:py-36">
-      <h2 className="text-white text-4xl">
+    <section className="flex justify-center flex-col text-center gap-10 py-20 lg:py-36">
+      <h2 className="text-white text-2xl lg:text-4xl">
         Ready to explore endless Web3 possibilities?
       </h2>
-      <div className="flex gap-4 self-center">
+      <div className="flex flex-col lg:flex-row gap-4 self-center">
         <Button
           asChild
           variant="outline"
@@ -506,7 +506,7 @@ function CallToAction({ setOpen }: { setOpen: (value: boolean) => void }) {
 
 function Footer() {
   return (
-    <footer className="border-t-[1px] border-[#E0E0E0] flex justify-center lg:py-14">
+    <footer className="border-t-[1px] border-[#E0E0E0] flex justify-center lg:py-8 py-6">
       <div className="flex gap-4 items-center">
         <IungooLogo className="text-white h-14 w-20" />
         <p className="text-white">Built with ❤️ by Iungoo</p>
