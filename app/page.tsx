@@ -254,7 +254,7 @@ function Header({
                 </div>
                 <div className="flex items-center gap-2">
                   <p className="text-zinc-400 text-xl">Join us on</p>
-                  <Link href="https://discord.gg/9wGbpMxC">
+                  <Link href="https://discord.gg/H8mRYjQQ2G">
                     <DiscordIcon className="w-[41px] h-[40px]" />
                   </Link>
                 </div>
