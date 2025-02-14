@@ -489,8 +489,8 @@ function CallToAction({ setOpen }: { setOpen: (value: boolean) => void }) {
           variant="outline"
           className="rounded-3xl bg-transparent text-white"
         >
-          <Link href="https://discord.gg/9wGbpMxC">
-            Be part of our Community
+          <Link href="https://discord.gg/H8mRYjQQ2G">
+            <DiscordIcon className="w-[41px] h-[40px]" />
           </Link>
         </Button>
         <Button
